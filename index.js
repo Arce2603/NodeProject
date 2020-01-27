@@ -5,6 +5,8 @@ let mongoose = require('mongoose');
 let jsonParser = bodyParser.json();
 let app = express();  //nos permite que appp tenga todas las caracteristicas de express
 let { StudentList } = require('./model'); //es el que estamos exportando al final en el model.js
+let { DATABASE_URL, PORT}= require('./config');
+
 
 app.use(express.static('public'));
 app.use(morgan('dev'));  //mode desarrollador
@@ -204,7 +206,7 @@ function closeServer() {
         });
 }
 
-runServer(8080, "mongodb://localhost/University");
+runServer(PORT, DATABASE_URL);
 
 //exporta para que se puedan utilizar
 module.exports = { app, runServer, closeServer };
