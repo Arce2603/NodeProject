@@ -37,10 +37,14 @@ let StudentList = {
             .catch(error => {
                 throw Error(error)
             });
+    },
+    addStudent: function (nombre, apellido, matricula) {
+      return Student.create({'nombre': nombre, 'apellido':apellido, 'matricula':matricula})
+          .then(student => {
+              console.log(student);
+              return student;})
+      .catch(error => { throw Error(error)});
     }
-    //addStudent: function (stdnt) {
-    //    return Student.create(stdnt)
-    //}
 };
 
 module.exports = {

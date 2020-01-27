@@ -104,9 +104,18 @@ app.post('/api/newStudent', jsonParser, (req, res) => {
             }
         });
         if (!exist) {
-            estudiantes.push(req.body);
-            console.log(estudiantes);
-            return res.status(201).json({});
+            //estudiantes.push(req.body);
+            StudentList.addStudent(nombre, apellido, matricula)
+                .then(result => {
+                    if(result)
+                        return res.status(201).json({result});
+                })
+            /*console.log(estudiantes);  //antes
+            return res.status(201).json({});*/
+                .catch(error => {
+                    console.log(error);
+                    return res.status(409).send()
+                });
         }
         else {
             res.statusMessage = 'Matricula ya existente'
